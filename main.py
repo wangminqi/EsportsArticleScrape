@@ -2,7 +2,9 @@
 import pandas as pd
 import re
 
+
 def website_recognize(url):
+    url = str(url)
     if url.find('http://pc.07073.com/') != -1:
         return '07073'
     # 07073
@@ -132,120 +134,40 @@ def website_recognize(url):
     return 'NA'
 
 
+target_file_path = r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx'
+df_dota2 = pd.read_excel(target_file_path, sheet_name=0)
+df_lol = pd.read_excel(target_file_path, sheet_name=1)
+df_csgo = pd.read_excel(target_file_path, sheet_name=2)
+df_fn = pd.read_excel(target_file_path, sheet_name=3)
+df_pubg = pd.read_excel(target_file_path, sheet_name=4)
+df_apex = pd.read_excel(target_file_path, sheet_name=5)
 
 
+for i in df_dota2.copy().index:
+    df_dota2.loc[i, 'plugins'] = website_recognize(df_dota2.iloc[i]['标题链接'])
 
+for i in df_lol.copy().index:
+    df_lol.loc[i, 'plugins'] = website_recognize(df_lol.iloc[i]['标题链接'])
 
+for i in df_csgo.copy().index:
+    df_csgo.loc[i, 'plugins'] = website_recognize(df_csgo.iloc[i]['标题链接'])
 
+for i in df_fn.copy().index:
+    df_fn.loc[i, 'plugins'] = website_recognize(df_fn.iloc[i]['标题链接'])
 
-df_dota2 = pd.read_excel(r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx',
-                         sheet_name=0)
-# df_lol = pd.read_excel(r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx',
-#                        sheet_name=1)
-# df_csgo = pd.read_excel(r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx',
-#                         sheet_name=2)
-# df_fn = pd.read_excel(r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx',
-#                       sheet_name=3)
-# df_pubg = pd.read_excel(r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx',
-#                         sheet_name=4)
-# df_apex = pd.read_excel(r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板.xlsx',
-#                         sheet_name=5)
+for i in df_pubg.copy().index:
+    df_pubg.loc[i, 'plugins'] = website_recognize(df_pubg.iloc[i]['标题链接'])
 
+for i in df_apex.copy().index:
+    df_apex.loc[i, 'plugins'] = website_recognize(df_apex.iloc[i]['标题链接'])
 
-for i in df_dota2.index:
-    website_recognize(df_dota2.iloc[i]['标题链接'])
-    print(df_dota2.iloc[i])
+target_file_path = r'C:\Users\wangminqi\PycharmProjects\EsportsArticleScrape\excel_template\excel模板2.xlsx'
+with pd.ExcelWriter(target_file_path) as writer:
+    df_dota2.to_excel(writer, 'dota2')
+    df_lol.to_excel(writer, 'lol')
+    df_csgo.to_excel(writer, 'csgo')
+    df_fn.to_excel(writer, 'fortnight')
+    df_pubg.to_excel(writer, 'pubg')
+    df_apex.to_excel(writer, 'apex')
 
-
-
-
-# # 07073
-# http://pc.07073.com
-# http://pc.07073.com/arc59454.html
-# http://pc.07073.com/arc59189.html
-#
-# # 腾讯堡垒之夜
-# https://fn.qq.com
-# http://fn.qq.com/cp/a20190306missing/index.htm
-# https://fn.qq.com/webplat/info
-# https://fn.qq.com/webplat/info/news_version3/10021/34544/34545/m20913/201903/800110.shtml
-#
-# # 游戏吧
-# https://www.gmz88.com/xinwen
-# https://www.gmz88.com/xinwen/159760.html
-#
-# # 游民星空
-# http://csgo.gamersky.com
-# http://csgo.gamersky.com/201901/1149198.shtml
-# https://www.gamersky.com/news
-# https://www.gamersky.com/news/201903/1166223.shtml
-#
-#
-# # csgo178
-# http://csgo.178.com
-# http://csgo.178.com/201903/347837593834.html
-#
-# # csgo官网
-# https://www.csgo.com.cn/article/details
-# https://www.csgo.com.cn/article/details/20190321/213421.html
-#
-# # 兔玩网
-# http://www.tuwan.com/game
-# http://www.tuwan.com/game/dota2/393688/
-#
-# # 玩加电竞
-# https://www.wanplus.com/article
-# https://www.wanplus.com/article/207915.html
-#
-# # 游侠网
-# http://www.ali213.net/news/html
-# http://www.ali213.net/news/html/2019-2/411461.html
-# http://3g.ali213.net/news/html/417615.html
-# http://in.ali213.net/news/201902/6346.html
-#
-# # 游久电竞
-# http://lol.uuu9.com/
-# http://lol.uuu9.com/201903/591152.shtml
-# bbs.uuu9.com/
-# http://bbs.uuu9.com/thread-13046669-1-1.html?tdsourcetag=s_pcqq_aiomsg
-#
-# # 多玩
-# http://dota2.duowan.com/
-# http://dota2.duowan.com/1709/369858520392.html
-#
-# # 游久电竞
-# http://dota2.uuu9.com/
-# http://dota2.uuu9.com/201903/589724.shtml
-# http://moba.uuu9.com/thread-4920490-1-1.html
-#
-# # 太平洋
-# http://fight.pcgames.com.cn
-# http://fight.pcgames.com.cn/735/7351216.html
-#
-# # Dota2官网
-# https://www.dota2.com.cn/article/details
-# https://www.dota2.com.cn/article/details/20190306/202141.html
-#
-# # 德玛西亚
-# http://www.demaxiya.com/news
-# http://www.demaxiya.com/news/20190399474.html
-# # 琵琶网
-# http://wy.pipaw.com/xinwen
-# http://wy.pipaw.com/xinwen/news441012.html
-# # lol官网
-# https://lol.dianjinghu.com/news
-# https://lol.dianjinghu.com/news/72669.html?docid=10853917297328644882
-# https://lol.qq.com/news/detail.shtml?
-# https://lol.qq.com/news/detail.shtml?docid=11704508428476250875
-# https://l.zhangyoubao.com/news/108659?docid=17957135356846687720
-# https://lol.duowan.com/1903/416398720150.html?docid=2017085560233605719
-# https://www.famulei.com/p/1013190?iframe=qq&docid=15301649744515833369
-# https://chijizs.uuu9.com/zt/lol/201903/590074.html?docid=17741698928880339963
-
-
-# df_dota2['标题链接']
-#
-#
-#
-# df_dota2.to_excel
 
