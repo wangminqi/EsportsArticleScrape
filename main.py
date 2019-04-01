@@ -10,17 +10,35 @@ def website_recognize(url):
     # http://pc.07073.com/arc59454.html
     # http://pc.07073.com/arc59189.html
 
-    if url.find('https://lol.qq.com/news/detail.shtml?') != -1:
-        return 'lol_qq'
-    # lol官网
-    # https://lol.dianjinghu.com/news
-    # https://lol.dianjinghu.com/news/72669.html?docid=10853917297328644882
-    # https://lol.qq.com/news/detail.shtml?
-    # https://lol.qq.com/news/detail.shtml?docid=11704508428476250875
-    # https://l.zhangyoubao.com/news/108659?docid=17957135356846687720
-    # https://lol.duowan.com/1903/416398720150.html?docid=2017085560233605719
-    # https://www.famulei.com/p/1013190?iframe=qq&docid=15301649744515833369
-    # https://chijizs.uuu9.com/zt/lol/201903/590074.html?docid=17741698928880339963
+    if url.find('http://csgo.178.com/') != -1:
+        return 'csgo178'
+    # csgo178
+    # http://csgo.178.com
+    # http://csgo.178.com/201903/347837593834.html
+
+    if url.find('https://www.csgo.com.cn/article/details/') != -1:
+        return 'csgo_official'
+    # csgo官网
+    # https://www.csgo.com.cn/article/details
+    # https://www.csgo.com.cn/article/details/20190321/213421.html
+
+    if url.find('http://www.demaxiya.com/news/') != -1:
+        return 'demaxiya'
+    # 德玛西亚
+    # http://www.demaxiya.com/news
+    # http://www.demaxiya.com/news/20190399474.html
+
+    if url.find('https://www.dota2.com.cn/article/details/') != -1:
+        return 'dota2_official'
+    # Dota2官网
+    # https://www.dota2.com.cn/article/details
+    # https://www.dota2.com.cn/article/details/20190306/202141.html
+
+    if url.find('http://dota2.duowan.com/') != -1:
+        return 'duowan_dota2'
+    # 多玩 Dota2
+    # http://dota2.duowan.com/
+    # http://dota2.duowan.com/1709/369858520392.html
 
     if url.find('https://fn.qq.com/webplat/info/') != -1:
         return 'fn_qq'
@@ -29,12 +47,6 @@ def website_recognize(url):
     # http://fn.qq.com/cp/a20190306missing/index.htm
     # https://fn.qq.com/webplat/info
     # https://fn.qq.com/webplat/info/news_version3/10021/34544/34545/m20913/201903/800110.shtml
-
-    if url.find('https://www.gmz88.com/xinwen/') != -1:
-        return 'gmz88'
-    # 游戏吧
-    # https://www.gmz88.com/xinwen
-    # https://www.gmz88.com/xinwen/159760.html
 
     if url.find('https://www.gamersky.com/news/') != -1:
         return 'gamersky'
@@ -48,23 +60,56 @@ def website_recognize(url):
     # http://csgo.gamersky.com
     # http://csgo.gamersky.com/201901/1149198.shtml
 
-    if url.find('http://csgo.178.com/') != -1:
-        return 'csgo178'
-    # csgo178
-    # http://csgo.178.com
-    # http://csgo.178.com/201903/347837593834.html
+    if url.find('https://www.gmz88.com/xinwen/') != -1:
+        return 'gmz88'
+    # 游戏吧
+    # https://www.gmz88.com/xinwen
+    # https://www.gmz88.com/xinwen/159760.html
 
-    if url.find('https://www.csgo.com.cn/article/details/') != -1:
-        return 'csgo_official'
-    # csgo官网
-    # https://www.csgo.com.cn/article/details
-    # https://www.csgo.com.cn/article/details/20190321/213421.html
+    if url.find('https://lol.qq.com/news/detail.shtml?') != -1:
+        return 'lol_qq'
+    # lol官网
+    # https://lol.dianjinghu.com/news
+    # https://lol.dianjinghu.com/news/72669.html?docid=10853917297328644882
+    # https://lol.qq.com/news/detail.shtml?
+    # https://lol.qq.com/news/detail.shtml?docid=11704508428476250875
+    # https://l.zhangyoubao.com/news/108659?docid=17957135356846687720
+    # https://lol.duowan.com/1903/416398720150.html?docid=2017085560233605719
+    # https://www.famulei.com/p/1013190?iframe=qq&docid=15301649744515833369
+    # https://chijizs.uuu9.com/zt/lol/201903/590074.html?docid=17741698928880339963
+
+    if url.find('http://fight.pcgames.com.cn/') != -1:
+        return 'pcgames'
+    # 太平洋
+    # http://fight.pcgames.com.cn
+    # http://fight.pcgames.com.cn/735/7351216.html
+
+    if url.find('http://wy.pipaw.com/xinwen/') != -1:
+        return 'pipaw'
+    # 琵琶网
+    # http://wy.pipaw.com/xinwen
+    # http://wy.pipaw.com/xinwen/news441012.html
 
     if url.find('http://www.tuwan.com/game/') != -1:
         return 'tuwan'
     # 兔玩网
     # http://www.tuwan.com/game
     # http://www.tuwan.com/game/dota2/393688/
+
+    if url.find('http://dota2.uuu9.com/') != -1:
+        return 'u9_dota2'
+    # 游久电竞 Dota2
+    # http://dota2.uuu9.com/
+    # http://dota2.uuu9.com/201903/589724.shtml
+    # http://moba.uuu9.com/thread-4920490-1-1.html
+
+    if url.find('http://lol.uuu9.com/') != -1:
+        return 'u9_lol'
+    # 游久电竞 LOL
+    # http://lol.uuu9.com/
+    # http://lol.uuu9.com/201903/591152.shtml
+    # bbs.uuu9.com/
+    # http://bbs.uuu9.com/thread-13046669-1-1.html?tdsourcetag=s_pcqq_aiomsg
 
     if url.find('https://www.wanplus.com/article/') != -1:
         return 'wanplus'
@@ -84,50 +129,11 @@ def website_recognize(url):
     # http://3g.ali213.net/news/html/417615.html
     # http://in.ali213.net/news/201902/6346.html
 
-    if url.find('http://dota2.duowan.com/') != -1:
-        return 'duowan_dota2'
-    # 多玩 Dota2
-    # http://dota2.duowan.com/
-    # http://dota2.duowan.com/1709/369858520392.html
+    return 'NA'
 
-    if url.find('http://lol.uuu9.com/') != -1:
-        return 'u9_lol'
-    # 游久电竞 LOL
-    # http://lol.uuu9.com/
-    # http://lol.uuu9.com/201903/591152.shtml
-    # bbs.uuu9.com/
-    # http://bbs.uuu9.com/thread-13046669-1-1.html?tdsourcetag=s_pcqq_aiomsg
 
-    if url.find('http://dota2.uuu9.com/') != -1:
-        return 'u9_dota2'
-    # 游久电竞
-    # http://dota2.uuu9.com/
-    # http://dota2.uuu9.com/201903/589724.shtml
-    # http://moba.uuu9.com/thread-4920490-1-1.html
 
-    if url.find('http://fight.pcgames.com.cn/') != -1:
-        return 'pcgames'
-    # 太平洋
-    # http://fight.pcgames.com.cn
-    # http://fight.pcgames.com.cn/735/7351216.html
 
-    if url.find('https://www.dota2.com.cn/article/details/') != -1:
-        return 'dota2_official'
-    # Dota2官网
-    # https://www.dota2.com.cn/article/details
-    # https://www.dota2.com.cn/article/details/20190306/202141.html
-
-    if url.find('http://www.demaxiya.com/news/') != -1:
-        return 'demaxiya'
-    # 德玛西亚
-    # http://www.demaxiya.com/news
-    # http://www.demaxiya.com/news/20190399474.html
-
-    if url.find('http://wy.pipaw.com/xinwen/') != -1:
-        return 'pipaw'
-    # 琵琶网
-    # http://wy.pipaw.com/xinwen
-    # http://wy.pipaw.com/xinwen/news441012.html
 
 
 
