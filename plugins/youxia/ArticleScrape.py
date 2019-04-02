@@ -73,7 +73,6 @@ def document_append(document, content, url):
     document.add_paragraph(" ")
 
 
-
 if __name__ == '__main__':
     document = Document()
     document.add_heading('Document Title', 0)
