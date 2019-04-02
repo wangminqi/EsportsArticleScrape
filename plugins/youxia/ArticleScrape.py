@@ -74,31 +74,31 @@ def document_append(document, content, url):
 
 
 
+if __name__ == '__main__':
+    document = Document()
+    document.add_heading('Document Title', 0)
+
+    # 读取并处理url
+    with open('堡垒之夜.txt', 'r') as f:
+        a = f.readlines()
+    b = []
+    for i in a:
+        b.append(i[:-1])
+
+    content = []
+    for url in b:
+        # 正则处理
+        response = collect_raw_content(url)
+        target_1 = refine_content(response)
+        print(target_1)
+        content.append([target_1, url])
+    for temp in content:
+        document_append(document, temp[0], temp[1])
+
+    # document.add_paragraph(target_1)
+    # document.add_paragraph(url)
+
+    document.save('堡垒之夜游侠.docx')
 
 
 
-document = Document()
-document.add_heading('Document Title', 0)
-
-# 读取并处理url
-with open('堡垒之夜.txt', 'r') as f:
-    a = f.readlines()
-b = []
-for i in a:
-    b.append(i[:-1])
-
-content = []
-for url in b:
-# 正则处理
-    response = collect_raw_content(url)
-    target_1 = refine_content(response)
-    print(target_1)
-    content.append([target_1, url])
-for temp in content:
-    document_append(document, temp[0], temp[1])
-
-
-# document.add_paragraph(target_1)
-# document.add_paragraph(url)
-
-document.save('堡垒之夜游侠.docx')
