@@ -11,6 +11,7 @@ def collect_raw_content(url):
     response.encoding = "utf-8"
     return response
 
+
 def refine_content(response):
     pattern = '<div class="ns_t4">[\s\S]*?<div class="news_ding">'
     target = re.search(pattern, response.text, flags=re.S).group()
@@ -39,6 +40,7 @@ def refine_content(response):
     target = re.sub('<div class="n_show_xg">[\s\S]*?<div class="news_ding">', '', target)
     target = re.sub('<script>[\s\S]*?<div class="news_ding">', '', target)
     return target
+
 
 def document_append(document, content, url):
     document.add_paragraph(url)
