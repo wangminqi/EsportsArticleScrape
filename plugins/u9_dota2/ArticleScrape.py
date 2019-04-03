@@ -8,49 +8,64 @@ import urllib
 
 def collect_raw_content(url):
     response = requests.get(url)
-    response.encoding = "utf-8"
+    response.encoding = "gb2312"
     return response
 
+
 def refine_content(response):
-    pattern_1 = '<div class="lt_con">[\s\S]*?<table class="table2">'
+    pattern_1 = '<div class="detail content">[\s\S]*?<p style="text-align:center; height:10px; margin-top:10px;">'
     try:
-	target_1 = re.search(pattern_1, response.text, flags=re.S).group()
+        target_1 = re.search(pattern, response.text, flags=re.S).group()
     except AttributeError:
-	return None
-    target_1 = re.sub('<div class="lt_con">[\s\S]*?<h1>','',target_1)
-    target_1 = re.sub('</h1>[\s\S]*?</script>','',target_1)
+        return None
+    target_1 = re.sub('<div style="[\s\S]*?">','',target_1)
+    target_1=re.sub('<h3>[\s\S]*?<div class="textdetail" id="content222">','',target_1)
+    target_1 = re.sub('<p style="box-sizing:[\s\S]*?">','', target_1, count=0, flags=0)
+    target_1 = re.sub('<p style="margin-top:[\s\S]*?">','', target_1, count=0, flags=0)
+    target_1 = re.sub('<span style="[\s\S]*?">', '', target_1, count=0, flags=0)
     target_1 = re.sub('<a href="[\s\S]*?">', '', target_1, count=0, flags=0)
-    target_1 = re.sub('<span style[\s\S]*?>','',target_1)
-    target_1 = re.sub('&nbsp;','',target_1)
-    target_1 = re.sub('&lt;','',target_1)
-    target_1 = re.sub('&gt;','',target_1)
-    target_1 = re.sub('</strong>', '', target_1, count=0, flags=0)
-    target_1 = re.sub('<strong>', '', target_1, count=0, flags=0)
+    target_1 = re.sub('<p img-box="img-box[\s\S]*?">','', target_1, count=0, flags=0)
+    target_1 = re.sub('<p>', '', target_1, count=0, flags=0)
+    target_1 = re.sub('</a>','',target_1, count=0, flags=0)
     target_1 = re.sub('</span>', '', target_1, count=0, flags=0)
-    target_1 = re.sub('<br/>', '', target_1, count=0, flags=0)
-    target_1 = re.sub('<br />', '', target_1, count=0, flags=0)
-    target_1 = re.sub('<p style="[\s\S]*?">','',target_1)
-    target_1 = re.sub('<p>','',target_1)
-    target_1 = re.sub('</p>','',target_1)
+    target_1 = re.sub('<br/>','',target_1, count=0, flags=0)
+    target_1 = re.sub(
+        '<div class="article">[\s\S]*<h1>', '', target_1, count=0, flags=0)
+    target_1 = re.sub('</h1>[\s\S]*?<td>', '', target_1, count=0,
+                      flags=0)
+    target_1 = re.sub('<div class="journalism-code" style="color:red;">', '',
+                      target_1,count=0, flags=0)
+    target_1 = re.sub('&nbsp;','',target_1, count=0, flags=0)
+    target_1 = re.sub('</td>[\s\S]*?<div class="article-tag clearfix">','',target_1)
     target_1 = re.sub('</div>','',target_1)
-    target_1 = re.sub('<div class="list">','',target_1)
-    target_1 = re.sub('<!--[\s\S]*?-->','',target_1)
-    target_1 = re.sub('</a>','',target_1)
-    target_1 = re.sub('<table class="table2">','',target_1)
+    target_1 = re.sub('<p style="text-indent:2em;">','',target_1)
+    target_1 = re.sub('<p style="TEXT-INDENT: 2em">','',target_1)
+    target_1 = re.sub('<strong>', '', target_1, count=0, flags=0)
+    target_1 = re.sub('</strong>', '', target_1, count=0, flags=0)
+    target_1 = re.sub('<p align="center">', '', target_1)
+    target_1 = re.sub('</p>', '', target_1, count=0, flags=0)
+  #  target_1 = re.sub('<a href="[^ ]*" target="_blank" >', '', target_1, count=0, flags=0)
+    target_1 = re.sub('<a target="[\s\S]*?">', '', target_1, count=0, flags=0)
+    target_1=re.sub('<p style="text-align[\s\S]*?">','',target_1)
+    target_1=re.sub('<h1>','',target_1)
+    target_1=re.sub('</h1>','',target_1)
+    target_1=re.sub('<div class="detail content">','',target_1)
     return target_1
+
 
 def document_append(document, content, url):
     document.add_paragraph(url)
-    temp_content = content.split('<img')
+    temp_content = content.split('\n')
     for i in temp_content:
         # 长度不为空
         if len(i) >= 1:
             # 确认非 照片链接
             if i[0] == '<' or ' ':
-                if 'src="' in i:
+                if 'src=' in i:
                     # 如果是包含照片链接，下载到本地，写入word中
-                    image_url = re.search('src="[^ ]*"', i, flags=re.S).group()[5:-1]
+                    image_url = re.search('src="[\s\S]*?"', i, flags=re.S).group()[5:-1]
                     print(image_url)
+# 增加路径使用方式判断
                     if __name__ == '__main__':
                         path = '../../images/'
                     else:
@@ -77,14 +92,16 @@ def document_append(document, content, url):
     document.add_paragraph(" ")
     document.add_paragraph(" ")
     document.add_paragraph(" ")
+# 增加 return document
     return document
+
 
 if __name__ == '__main__':
     document = Document()
     document.add_heading('Document Title', 0)
 
     # 读取并处理url
-    with open('07073.txt', 'r') as f:
+    with open('uu9.txt', 'r') as f:
         a = f.readlines()
     b = []
     for i in a:
@@ -103,7 +120,7 @@ if __name__ == '__main__':
     # document.add_paragraph(target_1)
     # document.add_paragraph(url)
 
-    document.save('07073.docx')
+    document.save('uuu9.docx')
 
 
 
