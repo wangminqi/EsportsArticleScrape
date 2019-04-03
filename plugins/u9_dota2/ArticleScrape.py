@@ -15,7 +15,7 @@ def collect_raw_content(url):
 def refine_content(response):
     pattern_1 = '<div class="detail content">[\s\S]*?<p style="text-align:center; height:10px; margin-top:10px;">'
     try:
-        target_1 = re.search(pattern, response.text, flags=re.S).group()
+        target_1 = re.search(pattern_1, response.text, flags=re.S).group()
     except AttributeError:
         return None
     target_1 = re.sub('<div style="[\s\S]*?">','',target_1)

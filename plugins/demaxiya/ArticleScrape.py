@@ -15,7 +15,7 @@ def collect_raw_content(url):
 def refine_content(response):
     pattern_1 = '<div class="dleft fl">[\s\S]*?<div class="likeart">'
     try:
-        target_1 = re.search(pattern, response.text, flags=re.S).group()
+        target_1 = re.search(pattern_1, response.text, flags=re.S).group()
     except AttributeError:
         return None
     target_1 = re.sub('<strong>', '', target_1, count=0, flags=0)
