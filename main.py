@@ -1,5 +1,5 @@
-#import plugins
-import plugins.youxia.ArticleScrape
+import plugins
+#import plugins.youxia.ArticleScrape
 import pandas as pd
 import re
 from docx import Document
@@ -29,7 +29,7 @@ def Scrape_main(df, game_category):
         else:
             df.loc[i, 'results'] = '网址无法解析，如确认网址内容有效，请联系数据部'
 
-    document.save('.\运营使用\\' + game_category + '.docx')
+    document.save('.\运营使用\output\\' + game_category + '.docx')
     return df
 
 
