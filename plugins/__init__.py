@@ -2,40 +2,42 @@ plugins_url_prefix = {'csgo178': 'http://csgo.178.com/',
                       'csgo_official': 'https://www.csgo.com.cn/article/details/',
                       'demaxiya': 'http://www.demaxiya.com/news/',
                       'dota2_official': 'https://www.dota2.com.cn/article/details/',
-                      'duowan_dota2': 'http://dota2.duowan.com/',
-                      'fn_qq': 'https://fn.qq.com/webplat/info/',
-                      'gamersky': 'https://www.gamersky.com/news/',
-                      'gamersky_csgo': 'http://csgo.gamersky.com/',
-                      'gmz88': 'https://www.gmz88.com/xinwen/',
+                      # 'duowan_dota2': 'http://dota2.duowan.com/',
+                      # 'fn_qq': 'https://fn.qq.com/webplat/info/',
+                      # 'gamersky': 'https://www.gamersky.com/news/',
+                      # 'gamersky_csgo': 'http://csgo.gamersky.com/',
+                      # 'gmz88': 'https://www.gmz88.com/xinwen/',
                       'lol_qq': 'https://lol.qq.com/news/detail.shtml?',
                       'pc07073': 'http://pc.07073.com/',
                       'pcgames': 'http://fight.pcgames.com.cn/',
-                      'pipaw': 'http://wy.pipaw.com/xinwen/',
-                      'tuwan': 'http://www.tuwan.com/game/',
+                      'pipa_lol': 'http://wy.pipaw.com/xinwen/',
+                      # 'tuwan': 'http://www.tuwan.com/game/',
                       'u9_dota2': 'http://dota2.uuu9.com/',
                       'u9_lol': 'http://lol.uuu9.com/',
-                      'wanplus': 'https://www.wanplus.com/article/',
+                      # 'wanplus': 'https://www.wanplus.com/article/',
                       'youxia': 'http://www.ali213.net/news/html/',
-                      'youxia_3g': 'http://3g.ali213.net/news/html/'}
-plugins_list = [#'csgo178',
-                #'csgo_official',
-                #'demaxiya',
-                #'dota2_official',
+                      # 'youxia_3g': 'http://3g.ali213.net/news/html/'
+                      'youxun_apex': 'http://www.yxdown.com/news/'}
+plugins_list = ['csgo178',
+                'csgo_official',
+                'demaxiya',
+                'dota2_official',
                 #'duowan_dota2',
                 #'fn_qq',
                 #'gamersky',
                 #'gamersky_csgo',
                 #'gmz88',
-                #'lol_qq',
-                #'pc07073',
-                #'pcgames',
-                #'pipaw',
+                'lol_qq',
+                'pc07073',
+                'pcgames',
+                'pipa_lol',
                 #'tuwan',
-                #'u9_dota2',
-                #'u9_lol',
+                'u9_dota2',
+                'u9_lol',
                 #'wanplus',
-                'youxia']
-#                'youxia_3g']
+                'youxia',
+                #'youxia_3g',
+                'youxun_apex']
 for i in range(len(plugins_list)):
     exec('import plugins.{}.ArticleScrape'.format(plugins_list[i]))
 
@@ -134,5 +136,10 @@ def website_recognize(url):
     # 游侠网_3g
     # http://3g.ali213.net/news/html/417615.html
     # http://in.ali213.net/news/201902/6346.html
+
+    # 游讯网 APEX
+    # http://www.yxdown.com/news
+    # http://www.yxdown.com/news/201904/449534.html
+
 
 

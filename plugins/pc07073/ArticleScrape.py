@@ -14,9 +14,9 @@ def collect_raw_content(url):
 def refine_content(response):
     pattern_1 = '<div class="lt_con">[\s\S]*?<table class="table2">'
     try:
-	target_1 = re.search(pattern_1, response.text, flags=re.S).group()
+	    target_1 = re.search(pattern_1, response.text, flags=re.S).group()
     except AttributeError:
-	return None
+	    return None
     target_1 = re.sub('<div class="lt_con">[\s\S]*?<h1>','',target_1)
     target_1 = re.sub('</h1>[\s\S]*?</script>','',target_1)
     target_1 = re.sub('<a href="[\s\S]*?">', '', target_1, count=0, flags=0)
@@ -69,6 +69,12 @@ def document_append(document, content, url):
 # 增加OSError以判断是否爬取非图片资料
                     except OSError:
                         document.add_paragraph('文章中可能包含视频，请检查 ' + image_name + '!!!!!!!!!!!!!!!!!!!')
+                    except ValueError:
+                        urllib.request.urlretrieve('http:' + image_url, path + image_name)
+                        document.add_picture(path + image_name, width=Inches(5))
+                        document.add_paragraph('http:' + image_url)
+                        document.add_paragraph(image_name)
+
                 else:
                     # 不包含图片链接，则直接写入word
                     document.add_paragraph(i)
