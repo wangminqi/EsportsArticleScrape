@@ -15,7 +15,7 @@ def collect_raw_content(url):
 def refine_content(response):
     pattern_1 = '<div class="article">[\s\S]*?<div class="about-tags">'
     try:
-        target_1 = re.search(pattern, response.text, flags=re.S).group()
+        target_1 = re.search(pattern_1, response.text, flags=re.S).group()
     except AttributeError:
         return None
     target_1 = re.sub('<div class="article">[\s\S]*?<h1 class="title">','',target_1)

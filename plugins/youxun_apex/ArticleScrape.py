@@ -15,7 +15,7 @@ def collect_raw_content(url):
 def refine_content(response):
     pattern_1 = '<div class="news">[\s\S]*?<div class="list">'
     try:
-        target = re.search(pattern, response.text, flags=re.S).group()
+        target = re.search(pattern_1, response.text, flags=re.S).group()
     except AttributeError:
         return None
     target_1 = re.search(pattern_1, response.text, flags=re.S).group()
@@ -40,7 +40,7 @@ def refine_content(response):
     target_1 = re.sub('</a>','',target_1)
     target_1 = re.sub('&ldquo;','"',target_1)
     target_1 = re.sub('&rdquo;','"',target_1)
-    return target
+    return target_1
 
 
 def document_append(document, content, url):

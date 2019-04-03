@@ -15,7 +15,7 @@ def collect_raw_content(url):
 def refine_content(response):
     pattern_1 = '<div class="lol_detail">[\s\S]*<p style="background[\s\S]*?">'
     try:
-        target = re.search(pattern, response.text, flags=re.S).group()
+        target_1 = re.search(pattern_1, response.text, flags=re.S).group()
     except AttributeError:
         return None
     target_1 = re.sub('<strong>', '', target_1, count=0, flags=0)
@@ -30,8 +30,7 @@ def refine_content(response):
     target_1 = re.sub('<a href="[\s\S]*?">', '', target_1, count=0, flags=0)
     target_1 = re.sub('<span style="[^\t\r\n]+">', '', target_1, count=0, flags=0)
     target_1 = re.sub('<div class="lol_detail">[\s\S]*<h1>', '', target_1, count=0, flags=0)
-    target_1 = re.sub('</h1>[\s\S]*<div class="detail_font">','',target_1,count=0,
-                      flags=0)
+    target_1 = re.sub('</h1>[\s\S]*<div class="detail_font">','',target_1,count=0, flags=0)
     target_1 = re.sub('<a class[\s\S]*?>','',target_1)
     target_1 = re.sub('<p style="background[\s\S]*?">','',target_1)
     target_1 = re.sub('<div style[\s\S]*?>','',target_1)
@@ -42,7 +41,7 @@ def refine_content(response):
     target_1 = re.sub('\u3000', '', target_1, count=0, flags=0)
     target_1 = re.sub('  +', '', target_1, count=0, flags=0)
 
-   return target_1
+    return target_1
 
 
 def document_append(document, content, url):
