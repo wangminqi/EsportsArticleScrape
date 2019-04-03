@@ -8,5 +8,15 @@ E-sports Article Scrape tools.
 images里存储每次爬虫的图片。（注意：不会自动清空！）
 images暂时没有按游戏分类，有需要 数据这里再增加这些功能
 
-
+目前支持：
+csgo178
+csgo官网
+德玛西亚
+dota官网
+pc07073
+太平洋网
+琵琶网 LOL
+游久网 Dota2， LOL
+游侠
+游讯 APEX
 
