@@ -43,7 +43,7 @@ def refine_content(response):
 
 def document_append(document, content, url):
     document.add_paragraph(url)
-    teamp_content=temp[0].split('<')
+    temp_content = content.split('<')
     for teamp1 in teamp_content:
         teamp_conten=teamp1.split('>')
         for i in teamp_conten:
