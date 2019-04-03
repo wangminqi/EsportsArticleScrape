@@ -28,11 +28,11 @@ def Scrape_main(df, game_category):
         else:
             df.loc[i, 'results'] = '网址无法解析，如确认网址内容有效，请联系数据部'
 
-    document.save('.\运营使用\output\\' + game_category + '.docx')
+    document.save('./运营使用/output/' + game_category + '.docx')
     return df
 
 
-target_file_path = r'.\运营使用\excel输入url.xlsx'
+target_file_path = r'./运营使用/excel输入url.xlsx'
 df_dota2 = pd.read_excel(target_file_path, sheet_name=0)
 df_lol = pd.read_excel(target_file_path, sheet_name=1)
 df_csgo = pd.read_excel(target_file_path, sheet_name=2)
@@ -47,7 +47,7 @@ df_fn = Scrape_main(df_fn, 'fortnight')
 df_pubg = Scrape_main(df_pubg, 'pubg')
 df_apex = Scrape_main(df_apex, 'apex')
 
-target_file_path = r'.\运营使用\excel结果.xlsx'
+target_file_path = r'./运营使用/excel结果.xlsx'
 with pd.ExcelWriter(target_file_path) as writer:
     df_dota2.to_excel(writer, 'dota2')
     df_lol.to_excel(writer, 'lol')
