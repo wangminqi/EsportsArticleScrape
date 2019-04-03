@@ -36,8 +36,8 @@ plugins_list = [#'csgo178',
                 #'wanplus',
                 'youxia']
 #                'youxia_3g']
-# for i in range(len(plugins_list)):
-#     exec('import {}.ArticleScrape'.format(plugins_list[i]))
+for i in range(len(plugins_list)):
+    exec('import plugins.{}.ArticleScrape'.format(plugins_list[i]))
 
 
 
