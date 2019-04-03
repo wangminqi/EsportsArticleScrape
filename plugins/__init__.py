@@ -40,6 +40,7 @@ plugins_list = [#'csgo178',
 #     exec('import {}.ArticleScrape'.format(plugins_list[i]))
 
 
+
 def website_recognize(url):
     url = str(url)
     for i in plugins_list:

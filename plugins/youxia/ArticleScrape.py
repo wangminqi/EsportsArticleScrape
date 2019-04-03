@@ -14,7 +14,10 @@ def collect_raw_content(url):
 
 def refine_content(response):
     pattern = '<div class="ns_t4">[\s\S]*?<div class="news_ding">'
-    target = re.search(pattern, response.text, flags=re.S).group()
+    try:
+        target = re.search(pattern, response.text, flags=re.S).group()
+    except AttributeError:
+        return None
     target = re.sub('<div class="ns_t4">[\s\S]*?<h1 class="newstit">', '', target)
     target = re.sub('</h1>[\s\S]*?<h2>', '', target)
     target = re.sub('</h2>[\s\S]*?</script>', '', target)
@@ -54,10 +57,15 @@ def document_append(document, content, url):
                     # 如果是包含照片链接，下载到本地，写入word中
                     image_url = re.search('src="[\s\S]*?"', i, flags=re.S).group()[5:-1]
                     print(image_url)
-                    path = '/home/yanziao/文档/工作/info/image/堡垒之夜/游侠/'
+# 增加路径使用方式判断
+                    if __name__ == '__main__':
+                        path = '../../images/'
+                    else:
+                        path = './images/'
                     image_name = image_url.split('/')[-1]
-                    urllib.request.urlretrieve(image_url, path + image_name)
                     try:
+# 将 urllib.request.urlretrieve(image_url, path + image_name) 移动至try内
+                        urllib.request.urlretrieve(image_url, path + image_name)
                         document.add_picture(path + image_name, width=Inches(5))
                         document.add_paragraph(image_url)
                         document.add_paragraph(image_name)
@@ -65,6 +73,9 @@ def document_append(document, content, url):
                         document.add_paragraph('无效照片!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' + image_name)
                     except docx.image.exceptions.UnexpectedEndOfFileError:
                         document.add_paragraph('图片有效但格式特殊，请手动插入 ' + image_name + '!!!!!!!!!!!!!!!!!!!')
+# 增加OSError以判断是否爬取非图片资料
+                    except OSError:
+                        document.add_paragraph('文章中可能包含视频，请检查 ' + image_name + '!!!!!!!!!!!!!!!!!!!')
                 else:
                     # 不包含图片链接，则直接写入word
                     document.add_paragraph(i)
@@ -73,6 +84,8 @@ def document_append(document, content, url):
     document.add_paragraph(" ")
     document.add_paragraph(" ")
     document.add_paragraph(" ")
+# 增加 return document
+    return document
 
 
 if __name__ == '__main__':
