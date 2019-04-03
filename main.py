@@ -17,12 +17,14 @@ def Scrape_main(df, game_category):
             loc = locals()
             exec("response = plugins.{}.ArticleScrape.collect_raw_content(url)".format(plugin))
             response = loc['response']
+            # 函数内部使用 exec必须这么调用
             exec("target = plugins.{}.ArticleScrape.refine_content(response)".format(plugin))
             target = loc['target']
             if target is None:
                 df.loc[i, 'results'] = '网址结构特殊，请联系数据部'
             else:
                 exec("document = plugins.{}.ArticleScrape.document_append(document, target, url)".format(plugin))
+                # 事实证明document第三方包在函数内外的调用都是一起同步到外部的
                 df.loc[i, 'results'] = '完成'
         else:
             df.loc[i, 'results'] = '网址无法解析，如确认网址内容有效，请联系数据部'
